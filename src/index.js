@@ -5,13 +5,13 @@ import "./index.css";
 
 const App = () => {
   const [data, setData] = useState({});
-  const [initial, setInitial] = useState({});
+  const [run, setRun] = useState(false);
+
   useEffect(() => {
     fetch("https://limitless-wildwood-37360.herokuapp.com/api/grid/data")
       .then(res => res.json())
       .then(r => {
         setData(r);
-        setInitial(r);
       })
       .catch(err => {
         if (err) throw err;
@@ -19,8 +19,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setInterval(updateGrid, 325);
-  }, []);
+    if (run) {
+      setInterval(updateGrid, 325);
+    }
+  }, [run]);
 
   function updateGrid() {
     fetch("https://limitless-wildwood-37360.herokuapp.com/update")
@@ -55,6 +57,7 @@ const App = () => {
           ))}
         </tbody>
       </table>
+      <button onClick={() => setRun(prev => !prev)}>RUN</button>
       <button onClick={reset}>RESET</button>
     </>
   );
