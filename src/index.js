@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 import "./index.css";
 
 const App = () => {
   const [data, setData] = useState({});
-  const [run, setRun] = useState(false);
 
   useEffect(() => {
-    fetch("https://limitless-wildwood-37360.herokuapp.com/api/grid/data")
-      .then(res => res.json())
+    axios
+      .get("https://limitless-wildwood-37360.herokuapp.com/api/grid/data")
       .then(r => {
-        setData(r);
+        setData(r.data);
       })
       .catch(err => {
         if (err) throw err;
@@ -19,12 +19,19 @@ const App = () => {
   }, []);
 
   function updateGrid() {
-    fetch("https://limitless-wildwood-37360.herokuapp.com/update")
-      .then(res => res.json())
-      .then(r => setData(r))
+    axios
+      .get("https://limitless-wildwood-37360.herokuapp.com/update")
+      .then(r => setData(r.data))
       .catch(err => {
         if (err) throw err;
       });
+  }
+
+  async function reset() {
+    const r = await axios.get(
+      "https://limitless-wildwood-37360.herokuapp.com/reset"
+    );
+    console.log(r);
   }
 
   return (
@@ -43,6 +50,7 @@ const App = () => {
         </tbody>
       </table>
       <button onClick={updateGrid}>UPDATE</button>
+      <button onClick={reset}>RESET</button>
     </>
   );
 };
