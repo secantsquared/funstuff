@@ -15,9 +15,9 @@ const App = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   setInterval(updateGrid, 200);
-  // }, []);
+  useEffect(() => {
+    setInterval(updateGrid, 325);
+  }, []);
 
   function updateGrid() {
     fetch("https://limitless-wildwood-37360.herokuapp.com/update")
