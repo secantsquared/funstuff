@@ -42,9 +42,7 @@ const App = () => {
           ))}
         </tbody>
       </table>
-      <button onClick={() => setRun(true)}>RUN</button>
-      <button onClick={() => setRun(false)}>STOP</button>
-      <button onClick={() => setData({})}>RESET</button>
+      <button onClick={updateGrid}>UPDATE</button>
     </>
   );
 };
