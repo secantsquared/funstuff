@@ -18,15 +18,16 @@ const App = () => {
       });
   }, []);
 
-  useCallback(() => {
+  useEffect(() => {
     const inter = () => {
       const interval = setInterval(updateGrid, 350);
       return () => clearInterval(interval);
     };
-    return () => {
-      inter();
-    };
-  }, []);
+    if (!run)
+      return () => {
+        inter();
+      };
+  }, [run]);
 
   function updateGrid() {
     fetch("https://limitless-wildwood-37360.herokuapp.com/update")
