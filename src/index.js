@@ -33,15 +33,6 @@ const App = () => {
       });
   }
 
-  function reset() {
-    fetch("https://limitless-wildwood-37360.herokuapp.com/reset")
-      .then(res => res.json())
-      .then(r => r)
-      .catch(err => {
-        if (err) throw err;
-      });
-  }
-
   return (
     <>
       <table className="Grid">
@@ -58,7 +49,6 @@ const App = () => {
         </tbody>
       </table>
       <button onClick={() => setRun(prev => !prev)}>RUN</button>
-      <button onClick={reset}>RESET</button>
     </>
   );
 };
