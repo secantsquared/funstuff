@@ -28,10 +28,15 @@ const App = () => {
   }
 
   async function reset() {
-    const r = await axios.get(
-      "https://limitless-wildwood-37360.herokuapp.com/reset"
-    );
-    console.log(r);
+    try {
+      await axios.get("https://limitless-wildwood-37360.herokuapp.com/reset");
+      const d = await axios.get(
+        "https://limitless-wildwood-37360.herokuapp.com/api/grid/data"
+      );
+      setData(d.data);
+    } catch (err) {
+      if (err) throw err;
+    }
   }
 
   return (
