@@ -19,8 +19,11 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    let inter;
     if (run) {
-      setInterval(updateGrid, 325);
+      inter = setInterval(updateGrid, 325);
+    } else {
+      return () => clearInterval(inter);
     }
   }, [run]);
 
