@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
@@ -18,14 +18,15 @@ const App = () => {
       });
   }, []);
 
-  useEffect(() => {
-    let inter;
-    if (run) {
-      inter = setInterval(updateGrid, 325);
-    } else {
-      return () => clearInterval(inter);
-    }
-  }, [run]);
+  useCallback(() => {
+    const inter = () => {
+      const interval = setInterval(updateGrid, 350);
+      return () => clearInterval(interval);
+    };
+    return () => {
+      inter();
+    };
+  }, []);
 
   function updateGrid() {
     fetch("https://limitless-wildwood-37360.herokuapp.com/update")
