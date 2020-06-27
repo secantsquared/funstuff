@@ -52,7 +52,6 @@ const App = () => {
         </tbody>
       </table>
       <button onClick={updateGrid}>UPDATE</button>
-      <button onClick={reset}>RESET</button>
     </>
   );
 };
